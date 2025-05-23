@@ -14,6 +14,7 @@ export const PokeCard = ({ selectedPokemon }) => {
     if (!sprites[val]) {
       return false
     }
+
     if (["versions", "other"].includes(val)) {
       return false
     }
@@ -33,7 +34,6 @@ export const PokeCard = ({ selectedPokemon }) => {
 
     if (move in c) {
       setSkill(c[move])
-      console.log("Found move in cache")
       return
     }
 
@@ -41,7 +41,6 @@ export const PokeCard = ({ selectedPokemon }) => {
       setLoadingSkill(true)
       const res = await fetch(moveUrl)
       const moveData = await res.json()
-      console.log("Fetched move from API", moveData)
       const description = moveData?.flavor_text_entries.filter((val) => {
         return val.version_group.name == "firered-leafgreen"
       })[0]?.flavor_text
@@ -54,7 +53,7 @@ export const PokeCard = ({ selectedPokemon }) => {
       c[move] = skillData
       localStorage.setItem("pokemon-moves", JSON.stringify(c))
     } catch (err) {
-      console.log(err)
+      console.log(err.message)
     } finally {
       setLoadingSkill(false)
     }
@@ -105,10 +104,7 @@ export const PokeCard = ({ selectedPokemon }) => {
   return (
     <div className="poke-card">
       {skill && (
-        <Modal
-          handleCloseModal={() => {
-            setSkill(null)
-          }}>
+        <Modal handleCloseModal={() => {setSkill(null)}}>
           <div>
             <h6>Name</h6>
             <h2 className="skill-name">{skill.name.replaceAll("-", " ")}</h2>
