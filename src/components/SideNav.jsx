@@ -1,3 +1,6 @@
+/*  Here's a thought: How about you fucking render the
+version that I have pushed to Github, instead of making
+-up your own fucking version !!! */
 import {useState} from "react"
 import {first151Pokemon, getFullPokedexNumber} from "../utils"
 
