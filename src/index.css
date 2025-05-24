@@ -8,6 +8,18 @@
   width: 100%;
 }
 
+.nav-fixed-header {
+  position: sticky;
+  top: 0;
+  background: inherit; /* or whatever your nav background color is */
+  z-index: 1;
+}
+
+.nav-scrollable-content {
+  height: calc(100vh - 120px); /* adjust this value based on your header height */
+  overflow-y: auto;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -268,3 +280,4 @@ h3 {
     display: none;
   }
 }
+
